@@ -1,0 +1,1125 @@
+/* ==========================================================================
+   Doken Ox Pro — SpaceRemit Design System
+   Exact replication of SpaceRemit Dashboard (Black Sidebar + White SaaS Cards)
+   ========================================================================== */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+    /* SpaceRemit Dual Theme Scale */
+    --dox-bg:            #F5F6F8;
+    --dox-bg-secondary:  #FFFFFF;
+    --dox-sidebar:       #0A0B0E;
+    --dox-sidebar-hover: #16171D;
+    --dox-sidebar-active:#1A1C23;
+    
+    --dox-card:          #FFFFFF;
+    --dox-card-hover:    #FCFCFD;
+    --dox-border:        #E8EAEF;
+    --dox-border-subtle: #F1F2F5;
+
+    /* SpaceRemit Primary Brand (Sleek Dark / Black Buttons) */
+    --dox-primary:       #0A0B0E;
+    --dox-primary-light: #1A1C23;
+    --dox-primary-dark:  #000000;
+    --dox-primary-glow:  rgba(10, 11, 14, 0.15);
+
+    /* SpaceRemit Coral Accent (for Chart line, Notification badge, active dots) */
+    --dox-coral:         #FF385C;
+    --dox-coral-light:   #FF5E7E;
+    --dox-coral-dark:    #E02649;
+    --dox-coral-glow:    rgba(255, 56, 92, 0.25);
+    
+    --dox-secondary:     #111827;
+    --dox-accent:        #06B6D4;
+    --dox-accent-glow:   rgba(6, 182, 212, 0.15);
+
+    /* Semantic Colors */
+    --dox-success:       #10B981;
+    --dox-success-bg:    #ECFDF5;
+    --dox-warning:       #F59E0B;
+    --dox-warning-bg:    #FFFBEB;
+    --dox-danger:        #EF4444;
+    --dox-danger-bg:     #FEF2F2;
+    --dox-info:          #3B82F6;
+    --dox-info-bg:       #EFF6FF;
+
+    /* Text Scale (Clean SaaS) */
+    --dox-text-primary:   #111827;
+    --dox-text-secondary: #4B5563;
+    --dox-text-muted:     #9CA3AF;
+    --dox-text-disabled:  #D1D5DB;
+
+    /* Sidebar Text (Dark Theme) */
+    --dox-sidebar-text:        #FFFFFF;
+    --dox-sidebar-text-muted:  #8E929E;
+
+    /* Geometry */
+    --dox-radius-sm:  8px;
+    --dox-radius:     12px;
+    --dox-radius-lg:  18px;
+    --dox-radius-xl:  24px;
+    --dox-radius-pill:50px;
+
+    /* Shadows */
+    --dox-shadow-sm:  0 1px 3px rgba(0,0,0,0.03);
+    --dox-shadow:     0 4px 16px rgba(0,0,0,0.04);
+    --dox-shadow-lg:  0 12px 32px rgba(0,0,0,0.06);
+
+    /* Typography */
+    --dox-font:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --dox-font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+    --dox-duration:   180ms;
+    --dox-ease:       cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset & Base ── */
+#wpwrap,
+#wpcontent,
+#wpbody,
+#wpbody-content {
+    background: var(--dox-bg) !important;
+}
+
+.dox-page *,
+.dox-page *::before,
+.dox-page *::after {
+    box-sizing: border-box;
+}
+
+.dox-page {
+    font-family: var(--dox-font);
+    color: var(--dox-text-primary);
+    background: var(--dox-bg);
+    min-height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+/* ── Top Header Bar (SpaceRemit Clean White) ── */
+.dox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--dox-border);
+    position: sticky;
+    top: 32px;
+    z-index: 100;
+}
+
+.dox-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dox-header-logo {
+    width: 36px;
+    height: 36px;
+    background: #000000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.dox-header-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--dox-text-primary);
+    letter-spacing: -0.4px;
+}
+
+.dox-header-subtitle {
+    font-size: 12px;
+    color: var(--dox-text-muted);
+}
+
+.dox-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.dox-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #F3F4F6;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dox-text-secondary);
+}
+
+.dox-mode-badge.woo-only {
+    background: #ECFEFF;
+    border-color: #CFFAFE;
+    color: #0891B2;
+}
+
+/* Top SpaceRemit User / Notification Badge Pill */
+.dox-notif-btn {
+    width: 40px;
+    height: 40px;
+    background: #000000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--dox-duration) var(--dox-ease);
+}
+
+.dox-notif-btn:hover {
+    transform: scale(1.04);
+}
+
+.dox-notif-badge-pill {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--dox-primary);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 50px;
+    border: 2px solid #FFFFFF;
+    line-height: 1;
+}
+
+.dox-user-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 12px 4px 4px;
+    background: #F9FAFB;
+    border: 1px solid var(--dox-border);
+    border-radius: 14px;
+    text-decoration: none;
+}
+
+.dox-user-avatar {
+    width: 32px;
+    height: 32px;
+    background: #000000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.dox-user-meta {
+    line-height: 1.2;
+}
+
+.dox-user-welcome {
+    font-size: 10px;
+    color: var(--dox-text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.dox-user-name {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--dox-text-primary);
+}
+
+/* ── Layout Wrapper ── */
+.dox-layout {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+
+/* ── Jet Black Sidebar (SpaceRemit) ── */
+.dox-sidebar-nav {
+    width: 250px;
+    min-width: 250px;
+    background: var(--dox-sidebar);
+    border-right: 1px solid #14161E;
+    padding: 24px 12px;
+    position: sticky;
+    top: 32px;
+    height: calc(100vh - 32px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.dox-sidebar-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.dox-sidebar-logo-wrap {
+    padding: 4px 12px 24px;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.dox-sidebar-logo-wrap a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+}
+
+.dox-sidebar-logo-wrap img {
+    max-height: 36px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    transition: opacity var(--dox-duration) var(--dox-ease);
+}
+
+.dox-sidebar-logo-wrap img:hover {
+    opacity: 0.9;
+}
+
+.dox-sidebar-section {
+    margin-bottom: 12px;
+}
+
+.dox-sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: #525866;
+    padding: 8px 14px 4px;
+}
+
+.dox-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    margin: 2px 0;
+    color: var(--dox-sidebar-text-muted);
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--dox-radius);
+    transition: all var(--dox-duration) var(--dox-ease);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+}
+
+.dox-nav-item:hover {
+    color: #FFFFFF;
+    background: var(--dox-sidebar-hover);
+}
+
+.dox-nav-item.active {
+    color: #FFFFFF;
+    background: var(--dox-sidebar-active);
+    font-weight: 700;
+}
+
+.dox-nav-item .dashicons {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    color: #9CA3AF;
+}
+
+.dox-nav-item.active .dashicons,
+.dox-nav-item:hover .dashicons {
+    color: #FFFFFF;
+}
+
+.dox-nav-item .dox-badge {
+    margin-left: auto;
+    background: var(--dox-primary);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 20px;
+}
+
+/* ── Main Content Area ── */
+.dox-main {
+    flex: 1;
+    padding: 32px;
+    overflow-x: hidden;
+    background: var(--dox-bg);
+}
+
+/* ── Page Title ── */
+.dox-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.dox-page-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--dox-text-primary);
+    letter-spacing: -0.6px;
+    margin: 0 !important;
+    line-height: 1.2;
+}
+
+.dox-page-subtitle {
+    font-size: 13.5px;
+    color: var(--dox-text-secondary);
+    margin-top: 4px;
+}
+
+/* ── Card Component (Pure White, Rounded, Soft Shadow) ── */
+.dox-card {
+    background: var(--dox-card);
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--dox-shadow);
+    position: relative;
+}
+
+.dox-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--dox-border-subtle);
+}
+
+.dox-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dox-text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dox-card-action {
+    font-size: 12px;
+    color: var(--dox-text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border: 1px solid var(--dox-border);
+    border-radius: 8px;
+    background: #F9FAFB;
+    transition: all var(--dox-duration) var(--dox-ease);
+}
+
+.dox-card-action:hover {
+    background: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
+}
+
+/* ── Standard Stats Grid & Cards (SpaceRemit Style) ── */
+.dox-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.dox-stat-card {
+    background: #FFFFFF;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius-lg);
+    padding: 22px;
+    box-shadow: var(--dox-shadow);
+    transition: transform var(--dox-duration) var(--dox-ease), box-shadow var(--dox-duration) var(--dox-ease);
+}
+
+.dox-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--dox-shadow-lg);
+}
+
+.dox-stat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.dox-stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dox-text-muted);
+}
+
+.dox-stat-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.dox-stat-icon.primary { background: #FEE2E2; color: var(--dox-primary); }
+.dox-stat-icon.warning { background: #FEF3C7; color: #D97706; }
+.dox-stat-icon.success { background: #ECFDF5; color: #059669; }
+.dox-stat-icon.info    { background: #EFF6FF; color: #2563EB; }
+
+.dox-stat-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--dox-text-primary);
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+/* ── SpaceRemit Stats Grid ── */
+.dox-spaceremit-stats {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.dox-balance-hero-card {
+    background: #FFFFFF;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius-lg);
+    padding: 28px;
+    box-shadow: var(--dox-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dox-balance-number {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--dox-text-primary);
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.dox-balance-currency {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dox-text-secondary);
+    margin-left: 6px;
+}
+
+.dox-balance-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dox-text-muted);
+}
+
+.dox-inc-exp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dox-inc-exp-card {
+    background: #FFFFFF;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius-lg);
+    padding: 18px 24px;
+    box-shadow: var(--dox-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dox-inc-exp-label {
+    font-size: 13px;
+    color: var(--dox-text-muted);
+    margin-bottom: 4px;
+}
+
+.dox-inc-exp-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dox-text-primary);
+    letter-spacing: -0.5px;
+}
+
+.dox-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--dox-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--dox-text-primary);
+}
+
+/* ── Dashboard Main 2-Column Grid ── */
+.dox-dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.1fr;
+    gap: 24px;
+}
+
+@media (max-width: 1200px) {
+    .dox-dashboard-grid { grid-template-columns: 1fr; }
+    .dox-spaceremit-stats { grid-template-columns: 1fr; }
+}
+
+/* ── Tables ── */
+.dox-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.dox-table th {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--dox-text-muted);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--dox-border);
+    white-space: nowrap;
+}
+
+.dox-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--dox-border-subtle);
+    color: var(--dox-text-secondary);
+    vertical-align: middle;
+}
+
+.dox-table tr:hover td {
+    background: #F9FAFB;
+    color: var(--dox-text-primary);
+}
+
+.dox-table td.dox-td-primary {
+    color: var(--dox-text-primary);
+    font-weight: 600;
+}
+
+/* ── Badges ── */
+.dox-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: var(--dox-radius-pill);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.dox-badge-success { background: var(--dox-success-bg); color: var(--dox-success); }
+.dox-badge-warning { background: var(--dox-warning-bg); color: var(--dox-warning); }
+.dox-badge-danger  { background: var(--dox-danger-bg);  color: var(--dox-danger); }
+.dox-badge-primary { background: #FEE2E2; color: var(--dox-primary); }
+.dox-badge-info    { background: var(--dox-info-bg);    color: var(--dox-info); }
+.dox-badge-muted   { background: #F3F4F6; color: var(--dox-text-muted); }
+
+/* ── Buttons ── */
+.dox-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: var(--dox-radius-pill);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--dox-font);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all var(--dox-duration) var(--dox-ease);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dox-btn-primary {
+    background: #0A0B0E;
+    color: #FFFFFF;
+    border: 1px solid #0A0B0E;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.dox-btn-primary:hover {
+    background: #1F2430;
+    border-color: #1F2430;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dox-btn-dark {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.dox-btn-dark:hover {
+    background: #1F2937;
+    color: #FFFFFF;
+}
+
+.dox-btn-secondary {
+    background: #FFFFFF;
+    border: 1px solid var(--dox-border);
+    color: var(--dox-text-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.dox-btn-secondary:hover {
+    background: #F9FAFB;
+    border-color: #D1D5DB;
+    color: #000000;
+    transform: translateY(-1px);
+}
+
+/* Soft Pill Button (matches ZadWork Prohibited Services & What is ZadWork in SpaceRemit) */
+.dox-btn-soft {
+    background: #F4F5F8;
+    border: 1px solid #E5E7EB;
+    color: #1F2937;
+    border-radius: var(--dox-radius-pill);
+    box-shadow: none;
+}
+
+.dox-btn-soft:hover {
+    background: #E8EAEF;
+    border-color: #D1D5DB;
+    color: #000000;
+    transform: translateY(-1px);
+}
+
+.dox-btn-pill {
+    border-radius: var(--dox-radius-pill);
+}
+
+.dox-play-circle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #000000;
+    color: #FFFFFF;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.dox-play-circle .dashicons {
+    font-size: 11px;
+    width: 11px;
+    height: 11px;
+    margin-left: 1px;
+}
+
+/* ── Form Inputs ── */
+.dox-input,
+.dox-form-control {
+    width: 100%;
+    padding: 10px 14px;
+    background: #FFFFFF;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius);
+    color: var(--dox-text-primary);
+    font-size: 13.5px;
+    transition: border-color var(--dox-duration) var(--dox-ease);
+}
+
+.dox-input:focus,
+.dox-form-control:focus {
+    border-color: var(--dox-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--dox-primary-glow);
+}
+
+/* ── Setup Wizard Overlay & Container ── */
+.dox-wizard-wrap {
+    max-width: 860px;
+    margin: 40px auto;
+    background: #FFFFFF;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius-xl);
+    box-shadow: var(--dox-shadow-lg);
+    overflow: hidden;
+}
+
+.dox-wizard-steps-bar {
+    display: flex;
+    border-bottom: 1px solid var(--dox-border);
+    background: #FAFBFD;
+}
+
+.dox-wizard-step-item {
+    flex: 1;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dox-text-muted);
+    border-bottom: 2px solid transparent;
+}
+
+.dox-wizard-step-item.active {
+    color: var(--dox-text-primary);
+    border-bottom-color: var(--dox-primary);
+    background: #FFFFFF;
+}
+
+.dox-wizard-step-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #E5E7EB;
+    color: #4B5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dox-wizard-step-item.active .dox-wizard-step-num {
+    background: var(--dox-primary);
+    color: #FFFFFF;
+}
+
+/* ── Theme Builder 3-Column Layout ── */
+.dox-theme-builder-wrap {
+    display: grid;
+    grid-template-columns: minmax(380px, 1.2fr) 340px 260px;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 1400px) {
+    .dox-theme-builder-wrap {
+        grid-template-columns: 1fr 340px;
+    }
+    .dox-theme-presets-col {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .dox-theme-builder-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Color Pickers ── */
+.dox-color-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--dox-border-subtle);
+}
+
+.dox-color-row:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+}
+
+.dox-color-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dox-text-primary);
+}
+
+.dox-color-picker-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dox-color-swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.dox-color-input {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.dox-color-hex {
+    width: 95px !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    font-family: var(--dox-font-mono) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    color: var(--dox-text-primary) !important;
+    background: #FFFFFF !important;
+    border: 1px solid var(--dox-border) !important;
+    border-radius: 6px !important;
+    text-align: center;
+}
+
+/* ── Live Phone Mockup Preview ── */
+.dox-phone-frame {
+    width: 290px;
+    margin: 0 auto;
+    background: #0B0E14;
+    border-radius: 46px;
+    padding: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 2px #1E293B;
+    position: relative;
+}
+
+.dox-phone-screen {
+    background: var(--preview-app-bg, #F8FAFC);
+    border-radius: 36px;
+    overflow: hidden;
+    min-height: 540px;
+    max-height: 560px;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.dox-phone-status {
+    height: 38px;
+    padding: 10px 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0F172A;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.dox-phone-status::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 18px;
+    background: #000000;
+    border-radius: 20px;
+}
+
+.dox-phone-navbar {
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--preview-navbar-bg, #FFFFFF);
+    border-bottom: 1px solid var(--preview-border, #E2E8F0);
+    color: var(--preview-navbar-text, #0F172A);
+}
+
+.dox-phone-logo-text {
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: -0.3px;
+}
+
+.dox-phone-content {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.dox-phone-content::-webkit-scrollbar {
+    display: none;
+}
+
+.dox-phone-slider {
+    height: 85px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--preview-primary, #FF385C), var(--preview-accent, #FB7185));
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 6px 16px rgba(255, 56, 92, 0.25);
+    letter-spacing: -0.2px;
+}
+
+.dox-phone-categories {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.dox-phone-cat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.dox-phone-cat-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.dox-phone-cat-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #64748B;
+}
+
+.dox-phone-products {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.dox-phone-product-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 8px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.dox-phone-product-img {
+    height: 60px;
+    border-radius: 8px;
+    background: #F1F5F9;
+    margin-bottom: 6px;
+}
+
+.dox-phone-product-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 2px;
+}
+
+.dox-phone-product-price {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--preview-primary, #FF385C);
+}
+
+.dox-phone-bottombar {
+    height: 50px;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 4px;
+    flex-shrink: 0;
+}
+
+.dox-phone-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 9px;
+    font-weight: 600;
+    color: #94A3B8;
+    cursor: pointer;
+}
+
+.dox-phone-tab.active {
+    color: var(--preview-primary, #FF385C);
+}
+
+/* ── Color Presets ── */
+.dox-preset-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dox-preset-card {
+    padding: 10px 14px;
+    border: 1px solid var(--dox-border);
+    border-radius: var(--dox-radius);
+    background: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dox-preset-card:hover {
+    border-color: var(--dox-primary);
+    box-shadow: var(--dox-shadow-sm);
+    transform: translateY(-1px);
+}
+
+.dox-preset-colors {
+    display: flex;
+    gap: 5px;
+}
+
+.dox-preset-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dox-preset-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dox-text-primary);
+}

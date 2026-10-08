@@ -1,0 +1,14 @@
+/**
+ * RTL overrides for Doken Ox Pro admin UI.
+ */
+
+.rtl .doken-ox-admin #doken-ox-admin-app {
+    direction: rtl;
+    text-align: right;
+}
+
+.rtl .doken-ox-table th,
+.rtl .doken-ox-table td {
+    text-align: right;
+}
+
